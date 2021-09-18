@@ -1,0 +1,111 @@
+<!-- SHOP FILTERS SCRIPT -->
+
+<script src="https://cdn.finsweet.com/files/cmslibrary-v1.8.js"></script>
+
+<script>
+(function() {
+var fsComponent = new FsLibrary('.shop-list')
+
+var myFilters = [
+  {
+    filterWrapper: '.product-type',
+    filterType: 'multi'
+  },
+  {
+    filterWrapper: '.price-range',
+    filterType: "exclusive",
+    filterByClass:".product-price",
+    filterRange: true
+  },
+    {
+    filterWrapper: '.product-availability',
+    filterByClass: ".product-quantity",
+    filterType: "multi",
+    filterRange: true
+  },
+  {
+    filterWrapper: '.story-collection',
+    filterType: 'multi'
+  },
+  {
+    filterWrapper: '.filter-search-parent',
+    filterType: 'multi'
+  },
+  {
+    filterWrapper: '.product-colour',
+    filterType: 'multi'
+  },
+  {
+    filterWrapper: '.product-season',
+    filterType: 'multi'
+  }
+]
+
+fsComponent.filter({
+  filterArray: myFilters,
+  activeClass: 'filter-button-active',
+  filterReset:'.filter-reset-master', // reset all active filter button
+  emptyMessage: '.empty-message', // displays message when no results returned
+  animation: {
+    enable: true,
+    duration: 200,
+    easing: 'ease-out',
+    	effects: 'fade translate(0px,20px)'
+	  }	
+	})
+
+})();
+
+
+	// Filters button script //
+  
+$('.fill-button .shop-filters').on('click', function(){
+  $('body').addClass('no-scroll');
+});
+$('.filter-cursor-wrap').on('click', function(){
+  $('body').removeClass('no-scroll');
+});
+
+</script>
+
+
+<!-- LOAD MORE CODE -->
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js'></script>
+<script>
+$( document ).ready(function() {
+	jQuery(function($) {
+        $lis = $('.shop-item'); 
+        min = 6;
+        max = $lis.length;
+        var visible = min;
+        
+        function showUpToIndex(index) {
+            $lis.hide();
+            $lis.slice(0, index).show();
+        }
+    
+        function disableButtons(){
+            if (visible >= max){
+                visible = max;
+                $('.load-more-button').hide();
+            }
+            else
+            {
+                $('.load-more-button').show();
+            }
+        }
+        
+        showUpToIndex(visible);
+        disableButtons();
+        
+        $('.load-more-button').click(function(e) {
+            e.preventDefault();
+            visible = visible + 6;
+            disableButtons();  
+            showUpToIndex(visible);
+        });
+    });
+    });
+   
+</script>
